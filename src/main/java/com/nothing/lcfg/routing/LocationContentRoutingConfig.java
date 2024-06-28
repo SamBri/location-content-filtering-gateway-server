@@ -1,7 +1,11 @@
 package com.nothing.lcfg.routing;
 
+import java.util.ResourceBundle;
+import java.util.UUID;
 import java.util.function.Function;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteLocator;
@@ -24,8 +28,20 @@ public class LocationContentRoutingConfig {
 	
 
 	
+	public static void main(String[] args) {
+
+//		System.out.println("Main");
+//	    Logger logger = LoggerFactory.getLogger("chapters.introduction.HelloWorld1");
+//	    logger.info("Hello world.".concat(System.getProperty("os.name")));	
+//	    
+ }
 	
 	
+	@Bean
+	ResourceBundle isoCountryCodeBundle() {
+		return   ResourceBundle.getBundle("iso_country_code");
+	}
+
 	
 	@Bean  	
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
@@ -34,7 +50,10 @@ public class LocationContentRoutingConfig {
 	              r.host(hostApplication)
 	             .and()
 	             .path("/cars/luxury-cars/**")
-	             .filters(f->f.rewritePath("/cars/?(?<segment>.*)", "/${segment}"))
+	             .filters(
+	            		 f->f.rewritePath("/cars/?(?<segment>.*)", "/${segment}")
+	            		 .addRequestHeadersIfNotPresent("X-REQUEST_ID:{}".replace("{}", UUID.randomUUID().toString()))
+	            		 )
 	             .uri("http://localhost:8085")
 	            )
 	             .route(r -> 
@@ -69,10 +88,7 @@ public class LocationContentRoutingConfig {
 	
 	
 	
-	public static void main(String[] args) {
-		
-	
-	}
+
 	
 
 }

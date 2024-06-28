@@ -2,6 +2,8 @@ package com.nothing.lcfg;
 
 import java.util.concurrent.TimeUnit;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.actuate.endpoint.Show;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,6 +19,12 @@ import org.springframework.web.client.RestTemplate;
 public class LocationContentFilteringGatewayServiceApplication {
 
 	public static void main(String[] args) {
+	
+//		System.out.println("Main");
+//	    Logger logger = LoggerFactory.getLogger("chapters.introduction.HelloWorld1");
+//	    logger.info("Hello world.".concat(System.getProperty("os.name")));	
+//	  
+//		
 		SpringApplication.run(LocationContentFilteringGatewayServiceApplication.class, args);
 	}
 

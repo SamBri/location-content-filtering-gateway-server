@@ -13,7 +13,10 @@ import org.springframework.web.client.RestTemplate;
 
 import com.nothing.lcfg.wsresponses.ipwhois.IpWhoIsResponse;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component("ipWhoIsClient")
+@Slf4j
 public class IPWhoIsClient {
 
 	@Autowired
@@ -31,7 +34,7 @@ public class IPWhoIsClient {
 
 		ResponseEntity<IpWhoIsResponse> response = restTemplate.exchange(request, IpWhoIsResponse.class);
 
-		System.out.println(response.getBody());
+		log.info("The IP Lookup response :: {}", response.getBody());
 		
 		IpWhoIsResponse ipWhoIsResponse = null;
 		if (response.getStatusCode() == HttpStatus.OK) {
