@@ -54,16 +54,16 @@ public class CountryLocationFilter implements GlobalFilter {
 		InetSocketAddress remoteAddress = exchange.getRequest().getRemoteAddress();
 
 		String remoteAddressIp = remoteAddress.getAddress().toString();
-        String localAddressIp = exchange.getRequest().getLocalAddress().toString();
+        String localAddressIp = exchange.getRequest().getLocalAddress().getAddress().toString()
 		
         
 
 //        log.info("The Locale of the request : {}", exchange.getLocaleContext().getLocale().toString());
-        log.info("The local address : {}",localAddressIp );
-		log.info("The remote addrsess : {}", remoteAddressIp);
+        log.info("The local address (sourceIp) : {}",localAddressIp );
+		log.info("The remote addrsess  (destinatioIp): {}", remoteAddressIp);
 
 		IpWhoIsResponse ipAddressLookupResponse = (IpWhoIsResponse) countryLocationService
-				.getRequesterIpGeoLocationMetaData(localAddressIp);
+				.getRequesterIpGeoLocationMetaData(remoteAddressIp);
 
 		log.info("The sourceIp country: {}", ipAddressLookupResponse.getCountry());
 		String countryCode = ipAddressLookupResponse.getCountry_code();
