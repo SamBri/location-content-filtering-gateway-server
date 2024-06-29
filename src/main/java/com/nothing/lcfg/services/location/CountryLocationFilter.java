@@ -109,6 +109,9 @@ public class CountryLocationFilter implements GlobalFilter {
 				routingMessage = routingMessagesBundle.getString(countryServiceStatus.toUpperCase());	
 				routingMessage = routingMessage.replace("{serviceName}",theUserRequestedService );
 				routingMessage = routingMessage.replace("{country}", sourceIpCountry);
+				
+				
+				log.error("routingMessage:", routingMessage);
 				throw new ServiceUnavailableException(routingMessage,countryServiceStatus);
 
 
