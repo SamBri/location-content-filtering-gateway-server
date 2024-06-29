@@ -73,22 +73,26 @@ public class CountryLocationFilter implements GlobalFilter {
 
 			String countryServiceStatus = isoCountryCodeBundle.getString(countryCode);
 
-			log.info("countryServiceStatus found {}", countryCode);
+			log.info("countryServiceStatus found {}", countryServiceStatus);
 
+			// java17 switch expression usage
 			switch (countryServiceStatus) {
-			case "BLOCKED": {
+			case "BLOCKED" -> {
 
 				log.info("@@@  BLOCKED service status.");
 				
 				throw new ServiceUnavailableException("This service is not available in your country.");
 			}
-			case "ALLOWED": {
+			case "ALLOWED" -> {
 
 				log.info("@@@  ALLOWED service status.");
 
 			}
-			default:
+			default ->{
 				throw new IllegalArgumentException("Unexpected value: " + countryServiceStatus);
+			
+			}
+			
 			}
 
 		} else {
