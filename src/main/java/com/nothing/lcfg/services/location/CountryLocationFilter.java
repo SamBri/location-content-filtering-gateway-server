@@ -23,7 +23,9 @@ import com.nothing.lcfg.wsresponses.ipwhois.IpWhoIsResponse;
 import io.micrometer.core.instrument.binder.http.HttpServletRequestTagsProvider;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
+import reactor.netty.DisposableServer;
 import reactor.netty.http.client.HttpClientRequest;
+import reactor.netty.http.server.HttpServerRequest;
 
 @Order(1)
 @Component
@@ -34,6 +36,9 @@ public class CountryLocationFilter implements GlobalFilter {
 
 	@Autowired
 	ResourceBundle isoCountryCodeBundle;
+	
+
+//	HttpServerRequest httpServerRequest;
 
 	@Autowired
 	public CountryLocationFilter(ICountryLocationService countryLocationService) {
@@ -51,8 +56,10 @@ public class CountryLocationFilter implements GlobalFilter {
 		String remoteAddressIp = remoteAddress.getAddress().toString();
         String localAddressIp = exchange.getRequest().getLocalAddress().toString();
 		
+        
+
 //        log.info("The Locale of the request : {}", exchange.getLocaleContext().getLocale().toString());
-		log.info("The local address : {}",localAddressIp );
+        log.info("The local address : {}",localAddressIp );
 		log.info("The remote addrsess : {}", remoteAddressIp);
 
 		IpWhoIsResponse ipAddressLookupResponse = (IpWhoIsResponse) countryLocationService

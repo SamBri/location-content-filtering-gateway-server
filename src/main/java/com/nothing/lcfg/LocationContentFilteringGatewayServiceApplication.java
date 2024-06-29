@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import reactor.netty.http.server.HttpServerRequest;
+
 @SpringBootApplication
 @RestController
 public class LocationContentFilteringGatewayServiceApplication {
@@ -44,5 +46,8 @@ public class LocationContentFilteringGatewayServiceApplication {
 	RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
-
+	
+	
+	
+	
 }

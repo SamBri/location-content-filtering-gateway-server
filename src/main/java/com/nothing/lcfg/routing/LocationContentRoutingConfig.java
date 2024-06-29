@@ -24,7 +24,11 @@ public class LocationContentRoutingConfig {
 	
 	
 	@Value("${my.host.domain}")
-	String hostApplication;
+	private String hostApplication;
+	
+	@Value("${ms.service.one}")
+	private String serviceOne;
+	
 	
 
 	
@@ -54,15 +58,15 @@ public class LocationContentRoutingConfig {
 	            		 f->f.rewritePath("/cars/?(?<segment>.*)", "/${segment}")
 	            		 .addRequestHeadersIfNotPresent("X-REQUEST_ID:{}".replace("{}", UUID.randomUUID().toString()))
 	            		 )
-	             .uri("http://localhost:8085")
+	             .uri(serviceOne)
 	            )
-	             .route(r -> 
-	              r.host(hostApplication)
-	             .and()
-	             .path("/cars/mainstream-cars/**")
-	             .filters(f->f.rewritePath("/cars/(?<segment>.*)", "/${segment}"))
-	             .uri("http://localhost:8086")
-	            )
+//	             .route(r -> 
+//	              r.host(hostApplication)
+//	             .and()
+//	             .path("/cars/mainstream-cars/**")
+//	             .filters(f->f.rewritePath("/cars/(?<segment>.*)", "/${segment}"))
+//	             .uri("http://localhost:8086")
+//	            )
 	            .build();
 	    
 	  //  /red/?(?<segment>.*), /$\{segment}
