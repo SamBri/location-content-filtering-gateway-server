@@ -32,7 +32,7 @@ public class LocationContentFilteringGatewayServiceApplication {
 
 	@RequestMapping("/")
 	public String index() {
-		return "api.cars.gateway";
+		return "<h1>Welcome to api.cars.gateway</h1>";
 	}
 
 	// 1. for all incoming traffic coming to host service name.
