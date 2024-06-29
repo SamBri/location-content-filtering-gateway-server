@@ -61,7 +61,7 @@ public class LocationContentRoutingConfig {
 	             .path("/cars/luxury-cars/**")
 	             .filters(
 	            		 f->f.rewritePath("/cars/?(?<segment>.*)", "/${segment}")
-	            		 .addRequestHeadersIfNotPresent("X-REQUEST_ID:{}".replace("{}", UUID.randomUUID().toString()))
+	            		 .addRequestHeadersIfNotPresent("X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
 	            		 )
 	             .uri(serviceOne)
 	            )

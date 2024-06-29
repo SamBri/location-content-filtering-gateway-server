@@ -1,6 +1,7 @@
 package com.nothing.lcfg.routing.exceptions;
 
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,6 +13,7 @@ import org.springframework.web.server.ServerWebExchange;
 
 import com.nothing.lcfg.RootResponse;
 
+import io.netty.handler.codec.http.HttpHeaders.Values;
 import lombok.extern.slf4j.Slf4j;
 
 @ControllerAdvice
@@ -35,7 +37,7 @@ public class LocationRoutingExceptionHandler {
 		exceptionResponse.setStatus("error");
 		exceptionResponse.setTimestamp(ZonedDateTime.now());
 		exceptionResponse.setResponse(e.getServiceStatus());
-		exceptionResponse.setRequestId(String.valueOf(requestHeaders.get("X-REQUEST_ID").toString()));
+		exceptionResponse.setRequestId(String.valueOf(requestHeaders.get("X-REQUEST-ID").iterator().next()));
 		return new ResponseEntity<RootResponse<String>>(exceptionResponse,HttpStatus.NOT_ACCEPTABLE);
 	}
 
