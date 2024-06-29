@@ -35,7 +35,7 @@ public class LocationRoutingExceptionHandler {
 		exceptionResponse.setStatus("error");
 		exceptionResponse.setTimestamp(ZonedDateTime.now());
 		exceptionResponse.setResponse(e.getServiceStatus());
-		exceptionResponse.setRequestId(String.valueOf(requestHeaders.get("X-REQUEST_ID")));
+		exceptionResponse.setRequestId(String.valueOf(requestHeaders.get("X-REQUEST_ID").toString()));
 		return new ResponseEntity<RootResponse<String>>(exceptionResponse,HttpStatus.NOT_ACCEPTABLE);
 	}
 
