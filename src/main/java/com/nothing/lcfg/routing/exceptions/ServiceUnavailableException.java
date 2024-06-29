@@ -1,10 +1,18 @@
 package com.nothing.lcfg.routing.exceptions;
 
+
 public class ServiceUnavailableException extends RuntimeException {
 
 	/**
 	 * 
 	 */
+	
+	private String serviceStatus;
+	
+	public String getServiceStatus() {
+		return serviceStatus;
+	}
+
 	private static final long serialVersionUID = -7611581638193945362L;
 
 	public ServiceUnavailableException() {
@@ -32,6 +40,14 @@ public class ServiceUnavailableException extends RuntimeException {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
+
+	public ServiceUnavailableException(String routingMessage, String countryServiceStatus) {
+		super(routingMessage);
+		this.serviceStatus = countryServiceStatus;
+	}
+	
+	
+	
 	
 	
 

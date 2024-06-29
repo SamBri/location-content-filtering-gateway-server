@@ -36,8 +36,15 @@ public class CountryLocationFilter implements GlobalFilter {
 	@Autowired
 	ResourceBundle isoCountryCodeBundle;
 
-//	HttpServerRequest httpServerRequest;
+  
 
+	@Autowired
+	ResourceBundle routingMessagesBundle;
+
+
+	
+	
+	
 	@Autowired
 	public CountryLocationFilter(ICountryLocationService countryLocationService) {
 		this.countryLocationService = countryLocationService;
@@ -49,6 +56,7 @@ public class CountryLocationFilter implements GlobalFilter {
 		log.info("@@@ inside filter ");
 		log.info("The Pre Filter Incoming Request Headers :: {}", exchange.getRequest().getHeaders());
 
+		String theUserRequestedService = exchange.getRequest().getPath().toString();
 		InetSocketAddress remoteAddress = exchange.getRequest().getRemoteAddress();
 
 		String remoteAddressIp = remoteAddress.getAddress().toString();
@@ -61,7 +69,8 @@ public class CountryLocationFilter implements GlobalFilter {
 		IpWhoIsResponse ipAddressLookupResponse = (IpWhoIsResponse) countryLocationService
 				.getRequesterIpGeoLocationMetaData(remoteAddressIp);
 
-		log.info("The sourceIp country: {}", ipAddressLookupResponse.getCountry());
+		String sourceIpCountry = ipAddressLookupResponse.getCountry();
+		log.info("The sourceIp country: {}", sourceIpCountry);
 		String countryCode = ipAddressLookupResponse.getCountry_code();
 
 		log.info("countryCode recvd {}", countryCode);
@@ -69,19 +78,39 @@ public class CountryLocationFilter implements GlobalFilter {
 
 			String countryServiceStatus = isoCountryCodeBundle.getString(countryCode);
 
+			
 			log.info("countryServiceStatus found {}", countryServiceStatus);
 
+		    String routingMessage = null;
 			// java17 switch expression usage
+		    countryServiceStatus = countryServiceStatus.toUpperCase();
+
 			switch (countryServiceStatus) {
 			case "BLOCKED" -> {
 
 				log.info("@@@  BLOCKED service status.");
 
-				throw new ServiceUnavailableException("This service is not available in your country.");
 			}
 			case "ALLOWED" -> {
 
 				log.info("@@@  ALLOWED service status.");
+
+			}
+			case "AVAILABLE" -> {
+
+				log.info("@@@  AVAILABLE service status.");
+
+			}
+			case "UNAVAILABLE" -> {
+
+				log.info("@@@  UNAVAILABLE service status.");
+				
+				
+				routingMessage = routingMessagesBundle.getString(countryServiceStatus.toUpperCase());	
+				routingMessage = routingMessage.replace("{serviceName}",theUserRequestedService );
+				routingMessage = routingMessage.replace("{country}", sourceIpCountry);
+				throw new ServiceUnavailableException(routingMessage,countryServiceStatus);
+
 
 			}
 			default -> {

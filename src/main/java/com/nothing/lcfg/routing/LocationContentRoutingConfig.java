@@ -45,6 +45,11 @@ public class LocationContentRoutingConfig {
 	ResourceBundle isoCountryCodeBundle() {
 		return   ResourceBundle.getBundle("iso_country_code");
 	}
+	
+	@Bean
+	ResourceBundle routingMessagesBundle() {
+		return   ResourceBundle.getBundle("routing-messages");
+	}
 
 	
 	@Bean  	
