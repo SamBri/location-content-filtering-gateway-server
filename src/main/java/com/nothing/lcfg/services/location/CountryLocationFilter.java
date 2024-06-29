@@ -3,7 +3,6 @@ package com.nothing.lcfg.services.location;
 import java.net.InetSocketAddress;
 import java.util.ResourceBundle;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +35,6 @@ public class CountryLocationFilter implements GlobalFilter {
 
 	@Autowired
 	ResourceBundle isoCountryCodeBundle;
-	
 
 //	HttpServerRequest httpServerRequest;
 
@@ -54,12 +52,10 @@ public class CountryLocationFilter implements GlobalFilter {
 		InetSocketAddress remoteAddress = exchange.getRequest().getRemoteAddress();
 
 		String remoteAddressIp = remoteAddress.getAddress().toString();
-        String localAddressIp = exchange.getRequest().getLocalAddress().getAddress().toString();
-		
-        
+		String localAddressIp = exchange.getRequest().getLocalAddress().getAddress().toString();
 
 //        log.info("The Locale of the request : {}", exchange.getLocaleContext().getLocale().toString());
-        log.info("The local address (sourceIp) : {}",localAddressIp );
+		log.info("The local address (sourceIp) : {}", localAddressIp);
 		log.info("The remote addrsess  (destinatioIp): {}", remoteAddressIp);
 
 		IpWhoIsResponse ipAddressLookupResponse = (IpWhoIsResponse) countryLocationService
@@ -67,7 +63,7 @@ public class CountryLocationFilter implements GlobalFilter {
 
 		log.info("The sourceIp country: {}", ipAddressLookupResponse.getCountry());
 		String countryCode = ipAddressLookupResponse.getCountry_code();
-		
+
 		log.info("countryCode recvd {}", countryCode);
 		if (countryCode != null && !countryCode.isEmpty()) {
 
@@ -80,7 +76,7 @@ public class CountryLocationFilter implements GlobalFilter {
 			case "BLOCKED" -> {
 
 				log.info("@@@  BLOCKED service status.");
-				
+
 				throw new ServiceUnavailableException("This service is not available in your country.");
 			}
 			case "ALLOWED" -> {
@@ -88,15 +84,15 @@ public class CountryLocationFilter implements GlobalFilter {
 				log.info("@@@  ALLOWED service status.");
 
 			}
-			default ->{
+			default -> {
 				throw new IllegalArgumentException("Unexpected value: " + countryServiceStatus);
-			
+
 			}
-			
+
 			}
 
 		} else {
-			
+
 			log.error("GeoLocation Data not found");
 
 		}
