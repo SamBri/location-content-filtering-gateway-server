@@ -40,5 +40,31 @@ public class LocationRoutingExceptionHandler {
 		exceptionResponse.setRequestId(String.valueOf(requestHeaders.get("X-REQUEST-ID").iterator().next()));
 		return new ResponseEntity<RootResponse<String>>(exceptionResponse,HttpStatus.NOT_ACCEPTABLE);
 	}
+	
+	
+	@ExceptionHandler(ServiceBlockedException.class)
+	public String handleServiceBlockedException(ServerWebExchange exchange, ServiceBlockedException e){
+		
+		log.info("@@  handleServiceBlockedException handler");
+		
+		log.error("ServiceUnavailableException",e);
+		
+//		RootResponse<String> exceptionResponse = new RootResponse<>();
+//		
+//		HttpHeaders requestHeaders = exchange.getRequest().getHeaders();
+//		exceptionResponse.setCode(HttpStatus.NOT_ACCEPTABLE.value());
+//		exceptionResponse.setMessage(e.getMessage());
+//		exceptionResponse.setStatus("error");
+//		exceptionResponse.setTimestamp(ZonedDateTime.now());
+//		exceptionResponse.setResponse(e.getServiceStatus());
+//		exceptionResponse.setRequestId(String.valueOf(requestHeaders.get("X-REQUEST-ID").iterator().next()));
+//		
+//		
+//		
+		
+		
+		
+		return "blocked";
+	}
 
 }
