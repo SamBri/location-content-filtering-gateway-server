@@ -1,6 +1,6 @@
 package com.nothing.lcfg.routing.exceptions;
 
-public class ServiceBlockedException extends Exception {
+public class ServiceBlockedException extends RuntimeException {
 
 	/**
 	 * 

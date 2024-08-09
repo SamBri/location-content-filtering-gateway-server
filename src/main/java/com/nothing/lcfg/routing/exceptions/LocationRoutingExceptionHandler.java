@@ -63,7 +63,7 @@ public class LocationRoutingExceptionHandler {
 //		
 		
 		
-		
+		// go to blocked html template
 		return "blocked";
 	}
 

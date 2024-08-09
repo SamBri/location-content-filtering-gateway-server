@@ -3,28 +3,19 @@ package com.nothing.lcfg.services.location;
 import java.net.InetSocketAddress;
 import java.util.ResourceBundle;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.gateway.filter.GatewayFilter;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 import org.springframework.web.server.ServerWebExchange;
 
-import com.nothing.lcfg.routing.LocationContentRoutingConfig;
-import com.nothing.lcfg.routing.exceptions.IpGeoLocationNotFoundException;
+import com.nothing.lcfg.routing.exceptions.ServiceBlockedException;
 import com.nothing.lcfg.routing.exceptions.ServiceUnavailableException;
 import com.nothing.lcfg.wsresponses.ipwhois.IpWhoIsResponse;
 
-import io.micrometer.core.instrument.binder.http.HttpServletRequestTagsProvider;
 import lombok.extern.slf4j.Slf4j;
 import reactor.core.publisher.Mono;
-import reactor.netty.DisposableServer;
-import reactor.netty.http.client.HttpClientRequest;
-import reactor.netty.http.server.HttpServerRequest;
 
 @Order(1)
 @Component
@@ -89,6 +80,7 @@ public class CountryLocationFilter implements GlobalFilter {
 			case "BLOCKED" -> {
 
 				log.info("@@@  BLOCKED service status.");
+				throw new ServiceBlockedException(routingMessage,countryServiceStatus);
 
 			}
 			case "ALLOWED" -> {
