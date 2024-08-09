@@ -32,7 +32,8 @@ public class LocationContentFilteringGatewayServiceApplication {
 
 	@RequestMapping("/")
 	public String index() {
-		return "<h1>Welcome to api.cars.gateway</h1>";
+		System.err.println("inside gateway landing page.");
+		return "welcome";
 	}
 
 	// 1. for all incoming traffic coming to host service name.
