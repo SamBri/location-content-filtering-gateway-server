@@ -1,10 +1,13 @@
 package com.nothing.lcfg;
 
-import org.springframework.beans.factory.annotation.Value;
+import java.util.ResourceBundle;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,11 +25,18 @@ public class LocationContentFilteringGatewayServiceApplication {
 		SpringApplication.run(LocationContentFilteringGatewayServiceApplication.class, args);
 	}
 	
-
+	
+	@Autowired
+	ResourceBundle  welcomePageResourceBundle;
+	
 
 	@RequestMapping("/")
-	public String index() {
+	public String index(Model theModel) {
+		final String toLuxuryAPI  =welcomePageResourceBundle.getString("luxury.url");
+		theModel.addAttribute("luxuryAPI",  toLuxuryAPI);
+		
 		System.err.println("inside gateway landing page.");
+		System.err.println("luxuryAPI" +toLuxuryAPI );
 		return "welcome";
 	}
 

@@ -29,10 +29,6 @@ public class LocationContentRoutingConfig {
 	}
 	
 	
-	@ModelAttribute("luxuryAPI")
-	public String getLuxuryServicePath() {
-		return welcomePageResourceBundle().getString("luxury.url");			
-	}
 	
 	
 //	@Bean
