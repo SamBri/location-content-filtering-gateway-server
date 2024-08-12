@@ -32,11 +32,23 @@ public class LocationContentFilteringGatewayServiceApplication {
 
 	@RequestMapping("/")
 	public String index(Model theModel) {
-		final String toLuxuryAPI  =welcomePageResourceBundle.getString("luxury.url");
-		theModel.addAttribute("luxuryAPI",  toLuxuryAPI);
+		final String toLuxuryCarsWorld =welcomePageResourceBundle.getString("luxury.cars.path");
+		final String toMainStreamCarsWorld  =welcomePageResourceBundle.getString("mainstream.cars.path");
+		final String toMicroCarsWorld  =welcomePageResourceBundle.getString("micro.cars.path");
+		final String toSportsCarsWorld  =welcomePageResourceBundle.getString("sports.cars.path");
+
+		theModel.addAttribute("toLuxuryCarsWorld",  toLuxuryCarsWorld);
+		theModel.addAttribute("toMainStreamCarsWorld",  toMainStreamCarsWorld);
+		theModel.addAttribute("toMicroCarsWorld",  toMicroCarsWorld);
+		theModel.addAttribute("toSportsCarsWorld",  toSportsCarsWorld);
+
 		
 		System.err.println("inside gateway landing page.");
-		System.err.println("luxuryAPI :: " +toLuxuryAPI );
+		System.err.println("toLuxuryCarsWorld :: " + toLuxuryCarsWorld);
+		System.err.println("toMainStreamCarsWorld :: " + toMainStreamCarsWorld);
+		System.err.println("toMicroCarsWorld :: " + toMicroCarsWorld);
+		System.err.println("toSportsCarsWorld :: " + toSportsCarsWorld);
+
 		return "welcome";
 	}
 
