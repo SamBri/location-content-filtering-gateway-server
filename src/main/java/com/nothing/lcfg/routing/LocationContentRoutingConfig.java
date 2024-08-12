@@ -40,7 +40,7 @@ public class LocationContentRoutingConfig {
 	public static void main(String[] args) {
 
 		
-		System.err.println(welcomeSource().getMessage("luxury.cars.path", null, null));
+		System.err.println(welcomeSource().getMessage("luxury.cars.path", args, null));
 		
 		
 //		System.out.println("Main");
