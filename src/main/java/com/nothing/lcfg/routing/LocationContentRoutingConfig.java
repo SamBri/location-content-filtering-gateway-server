@@ -9,6 +9,7 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.thymeleaf.messageresolver.StandardMessageResolver;
 
 @Configuration
 public class LocationContentRoutingConfig {
@@ -27,6 +28,13 @@ public class LocationContentRoutingConfig {
 	    welcomeSrc.setBasename("welcome");
 	    return welcomeSrc;
 	}
+	
+	
+//	@Bean
+//	StandardMessageResolver myMessageResolver() {
+//		
+//		return new StandardMessageResolver().
+//	}
 
 	
 	public static void main(String[] args) {
