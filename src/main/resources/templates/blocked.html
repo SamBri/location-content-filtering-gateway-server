@@ -1,4 +1,4 @@
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -43,11 +43,11 @@ margin-left: 35%;
 
     <div class="service">
 
-        <h1 class="response">{{response}}</h1>
+        <h1  th:text="${response}" class="response"></h1>
 
-        <p class="code">{{statusCode}}</p>
+        <p th:text="${statusCode}" class="code"></p>
 
-        <p class ="message">{{message}}</p>
+        <p th:text="${message}" class ="message"></p>
 
     </div>
 
