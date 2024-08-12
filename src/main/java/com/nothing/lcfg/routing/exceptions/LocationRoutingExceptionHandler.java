@@ -42,7 +42,7 @@ public class LocationRoutingExceptionHandler {
 
 		theModel.addAttribute("response", e.getServiceStatus());
 		theModel.addAttribute("message", e.getMessage());
-		theModel.addAttribute("statusCode", HttpStatus.NOT_ACCEPTABLE);
+		theModel.addAttribute("statusCode", HttpStatus.NOT_ACCEPTABLE.value());
 
 		exceptionResponse.setRequestId(String.valueOf(requestHeaders.get("X-REQUEST-ID").iterator().next()));
 		return "unavailable";
