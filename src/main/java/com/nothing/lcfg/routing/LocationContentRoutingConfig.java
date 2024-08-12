@@ -84,6 +84,7 @@ public class LocationContentRoutingConfig {
 	             .filters(
 	            		 f->f.rewritePath("/cars/?(?<segment>.*)", "/${segment}")
 	            		 .addRequestHeadersIfNotPresent("X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
+	            		 .addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight to the url
 	            		 )
 	             .uri(luxuryCarsInterface)
 	            )
@@ -91,21 +92,33 @@ public class LocationContentRoutingConfig {
 	              r.host(hostApplication)
 	             .and()
 	             .path("/cars/mainstream-cars/**")
-	             .filters(f->f.rewritePath("/cars/(?<segment>.*)", "/${segment}"))
+	             .filters(
+	            		 f->f.rewritePath("/cars/?(?<segment>.*)", "/${segment}")
+	            		 .addRequestHeadersIfNotPresent("X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
+	            		 .addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight to the url
+	            		 )
 	             .uri(mainstreamCarsInterface)
 	            )
 	             .route(r -> 
 	              r.host(hostApplication)
 	             .and()
 	             .path("/cars/sports-cars/**")
-	             .filters(f->f.rewritePath("/cars/(?<segment>.*)", "/${segment}"))
+	             .filters(
+	            		 f->f.rewritePath("/cars/?(?<segment>.*)", "/${segment}")
+	            		 .addRequestHeadersIfNotPresent("X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
+	            		 .addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight to the url
+	            		 )
 	             .uri(sportsCarsInterface)
 	            )
 	             .route(r -> 
 	              r.host(hostApplication)
 	             .and()
 	             .path("/cars/micro-cars/**")
-	             .filters(f->f.rewritePath("/cars/(?<segment>.*)", "/${segment}"))
+	             .filters(
+	            		 f->f.rewritePath("/cars/?(?<segment>.*)", "/${segment}")
+	            		 .addRequestHeadersIfNotPresent("X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
+	            		 .addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight to the url
+	            		 )
 	             .uri(microCarsInterface)
 	            )
 	            .build();
