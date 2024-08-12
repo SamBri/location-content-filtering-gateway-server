@@ -19,8 +19,20 @@ public class LocationContentRoutingConfig {
 	@Value("${my.host.domain}")
 	private String hostApplication;
 	
-	@Value("${ms.service.one}")
-	private String serviceOne;
+	@Value("${ms.luxury.cars}")
+	private String luxuryCarsInterface;
+	
+	
+	@Value("${ms.mainstream.cars}")
+	private String mainstreamCarsInterface;
+	
+	
+	@Value("${ms.sports.cars}")
+	private String sportsCarsInterface;
+	
+	
+	@Value("${ms.micro.cars}")
+	private String microCarsInterface;
 	
 	
 	@Bean
@@ -73,15 +85,29 @@ public class LocationContentRoutingConfig {
 	            		 f->f.rewritePath("/cars/?(?<segment>.*)", "/${segment}")
 	            		 .addRequestHeadersIfNotPresent("X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
 	            		 )
-	             .uri(serviceOne)
+	             .uri(luxuryCarsInterface)
 	            )
-//	             .route(r -> 
-//	              r.host(hostApplication)
-//	             .and()
-//	             .path("/cars/mainstream-cars/**")
-//	             .filters(f->f.rewritePath("/cars/(?<segment>.*)", "/${segment}"))
-//	             .uri("http://localhost:8086")
-//	            )
+	             .route(r -> 
+	              r.host(hostApplication)
+	             .and()
+	             .path("/cars/mainstream-cars/**")
+	             .filters(f->f.rewritePath("/cars/(?<segment>.*)", "/${segment}"))
+	             .uri(mainstreamCarsInterface)
+	            )
+	             .route(r -> 
+	              r.host(hostApplication)
+	             .and()
+	             .path("/cars/sports-cars/**")
+	             .filters(f->f.rewritePath("/cars/(?<segment>.*)", "/${segment}"))
+	             .uri(sportsCarsInterface)
+	            )
+	             .route(r -> 
+	              r.host(hostApplication)
+	             .and()
+	             .path("/cars/sports-cars/**")
+	             .filters(f->f.rewritePath("/cars/(?<segment>.*)", "/${segment}"))
+	             .uri(microCarsInterface)
+	            )
 	            .build();
 	    
 	  //  /red/?(?<segment>.*), /$\{segment}
