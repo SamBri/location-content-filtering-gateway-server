@@ -104,7 +104,7 @@ public class LocationContentRoutingConfig {
 	             .route(r -> 
 	              r.host(hostApplication)
 	             .and()
-	             .path("/cars/sports-cars/**")
+	             .path("/cars/micro-cars/**")
 	             .filters(f->f.rewritePath("/cars/(?<segment>.*)", "/${segment}"))
 	             .uri(microCarsInterface)
 	            )
