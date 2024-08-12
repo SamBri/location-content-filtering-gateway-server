@@ -57,7 +57,7 @@ public class LocationRoutingExceptionHandler {
 
 		theModel.addAttribute("response", e.getServiceStatus());
 		theModel.addAttribute("message", e.getMessage());
-		theModel.addAttribute("statusCode", HttpStatus.NOT_ACCEPTABLE);
+		theModel.addAttribute("statusCode", HttpStatus.NOT_ACCEPTABLE.value());
 
 		// go to blocked html template
 		return "blocked";
