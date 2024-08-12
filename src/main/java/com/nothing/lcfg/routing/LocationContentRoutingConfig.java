@@ -9,6 +9,7 @@ import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.thymeleaf.messageresolver.StandardMessageResolver;
 
 @Configuration
@@ -23,10 +24,14 @@ public class LocationContentRoutingConfig {
 	
 	
 	@Bean
-	public static ResourceBundleMessageSource welcomeSource() {
-	    ResourceBundleMessageSource welcomeSrc = new ResourceBundleMessageSource();
-	    welcomeSrc.setBasename("welcome");
-	    return welcomeSrc;
+	 ResourceBundle  welcomePageResourceBundle() {
+		return   ResourceBundle.getBundle("welcome");
+	}
+	
+	
+	@ModelAttribute("luxuryAPI")
+	public String getLuxuryServicePath() {
+		return welcomePageResourceBundle().getString("luxury.url");			
 	}
 	
 	
@@ -40,7 +45,7 @@ public class LocationContentRoutingConfig {
 	public static void main(String[] args) {
 
 		
-		System.err.println(welcomeSource().getMessage("luxury.cars.path", args, null));
+	//	System.err.println(welcomePageResourceBundle().getString("luxury.url"));
 		
 		
 //		System.out.println("Main");
