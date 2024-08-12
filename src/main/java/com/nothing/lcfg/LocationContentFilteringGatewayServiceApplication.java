@@ -36,7 +36,7 @@ public class LocationContentFilteringGatewayServiceApplication {
 		theModel.addAttribute("luxuryAPI",  toLuxuryAPI);
 		
 		System.err.println("inside gateway landing page.");
-		System.err.println("luxuryAPI" +toLuxuryAPI );
+		System.err.println("luxuryAPI :: " +toLuxuryAPI );
 		return "welcome";
 	}
 
