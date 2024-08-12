@@ -1,5 +1,6 @@
 package com.nothing.lcfg;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,8 @@ public class LocationContentFilteringGatewayServiceApplication {
 //		
 		SpringApplication.run(LocationContentFilteringGatewayServiceApplication.class, args);
 	}
+	
+
 
 	@RequestMapping("/")
 	public String index() {
