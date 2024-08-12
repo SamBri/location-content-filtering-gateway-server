@@ -23,7 +23,7 @@ public class LocationContentRoutingConfig {
 	
 	
 	@Bean
-	public ResourceBundleMessageSource welcomeSource() {
+	public static ResourceBundleMessageSource welcomeSource() {
 	    ResourceBundleMessageSource welcomeSrc = new ResourceBundleMessageSource();
 	    welcomeSrc.setBasename("welcome");
 	    return welcomeSrc;
@@ -39,6 +39,10 @@ public class LocationContentRoutingConfig {
 	
 	public static void main(String[] args) {
 
+		
+		System.err.println(welcomeSource().getMessage("luxury.cars.path", null, null));
+		
+		
 //		System.out.println("Main");
 //	    Logger logger = LoggerFactory.getLogger("chapters.introduction.HelloWorld1");
 //	    logger.info("Hello world.".concat(System.getProperty("os.name")));	
