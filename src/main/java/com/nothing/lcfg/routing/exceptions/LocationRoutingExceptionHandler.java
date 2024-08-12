@@ -20,43 +20,45 @@ import lombok.extern.slf4j.Slf4j;
 @ControllerAdvice
 @Slf4j
 public class LocationRoutingExceptionHandler {
-	
-	
-	
+
 	@ExceptionHandler(ServiceUnavailableException.class)
-	public ResponseEntity<RootResponse<String>> handleServiceUnavailableException(ServerWebExchange exchange, ServiceUnavailableException e){
-		
+	public String handleServiceUnavailableException(ServerWebExchange exchange,
+			Model theModel, ServiceUnavailableException e) {
+
 		log.info("@@  handleServiceUnavailableException handler");
-		
-		log.error("ServiceUnavailableException",e);
-		
+
+		log.error("ServiceUnavailableException", e);
+
 		RootResponse<String> exceptionResponse = new RootResponse<>();
-		
+
 		HttpHeaders requestHeaders = exchange.getRequest().getHeaders();
 		exceptionResponse.setCode(HttpStatus.NOT_ACCEPTABLE.value());
 		exceptionResponse.setMessage(e.getMessage());
 		exceptionResponse.setStatus("error");
 		exceptionResponse.setTimestamp(ZonedDateTime.now());
 		exceptionResponse.setResponse(e.getServiceStatus());
-		exceptionResponse.setRequestId(String.valueOf(requestHeaders.get("X-REQUEST-ID").iterator().next()));
-		return new ResponseEntity<RootResponse<String>>(exceptionResponse,HttpStatus.NOT_ACCEPTABLE);
-	}
-	
-	
-	@ExceptionHandler(ServiceBlockedException.class)
-	public String handleServiceBlockedException(ServerWebExchange exchange, ServiceBlockedException e,Model theModel){
-		
-		log.info("@@  handleServiceBlockedException handler");
-		
-		log.error("ServiceUnavailableException",e);
-		
-		
+
+		log.error("ServiceUnavailableException", e);
+
 		theModel.addAttribute("response", e.getServiceStatus());
 		theModel.addAttribute("message", e.getMessage());
 		theModel.addAttribute("statusCode", HttpStatus.NOT_ACCEPTABLE);
 
-		
-		
+		exceptionResponse.setRequestId(String.valueOf(requestHeaders.get("X-REQUEST-ID").iterator().next()));
+		return "unavailable";
+	}
+
+	@ExceptionHandler(ServiceBlockedException.class)
+	public String handleServiceBlockedException(ServerWebExchange exchange, ServiceBlockedException e, Model theModel) {
+
+		log.info("@@  handleServiceBlockedException handler");
+
+		log.error("ServiceUnavailableException", e);
+
+		theModel.addAttribute("response", e.getServiceStatus());
+		theModel.addAttribute("message", e.getMessage());
+		theModel.addAttribute("statusCode", HttpStatus.NOT_ACCEPTABLE);
+
 		// go to blocked html template
 		return "blocked";
 	}

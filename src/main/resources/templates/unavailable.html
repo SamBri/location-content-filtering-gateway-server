@@ -1,12 +1,22 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UNAVAILABLE</title>
-        <link rel="icon" href="">
-    
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
-    <!--
+<head>
+<meta charset="UTF-8">
+<title>UNAVAILABLE</title>
+<link rel="icon" href="">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+	href="https://fonts.googleapis.com/css2?family=Rubik+Mono+One&display=swap"
+	rel="stylesheet">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	crossorigin="anonymous">
+
+   <!--
     
 {
   "code": 406,
@@ -51,14 +61,13 @@
 
 
 
+  <div class="service">
 
-    <div class="service">
+        <h1  th:text="${response}" class="response"></h1>
 
-        <h1 class="response">{{response}}</h1>
+        <p th:text="${statusCode}" class="code"></p>
 
-        <p class="code">{{statusCode}}</p>
-
-        <p class ="message">{{message}}</p>
+        <p th:text="${message}" class ="message"></p>
 
     </div>
 
