@@ -2,22 +2,13 @@ package com.nothing.lcfg.routing;
 
 import java.util.ResourceBundle;
 import java.util.UUID;
-import java.util.function.Function;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.route.RouteLocator;
-import org.springframework.cloud.gateway.route.builder.GatewayFilterSpec;
-import org.springframework.cloud.gateway.route.builder.PredicateSpec;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
-import org.springframework.cloud.gateway.route.builder.UriSpec;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import com.nothing.lcfg.services.location.CountryLocationFilter;
-import com.nothing.lcfg.services.location.ICountryLocationService;
+import org.springframework.context.support.ResourceBundleMessageSource;
 
 @Configuration
 public class LocationContentRoutingConfig {
@@ -30,6 +21,12 @@ public class LocationContentRoutingConfig {
 	private String serviceOne;
 	
 	
+	@Bean
+	public ResourceBundleMessageSource welcomeSource() {
+	    ResourceBundleMessageSource welcomeSrc = new ResourceBundleMessageSource();
+	    welcomeSrc.setBasename("welcome");
+	    return welcomeSrc;
+	}
 
 	
 	public static void main(String[] args) {
