@@ -215,7 +215,7 @@ public class CountryLocationFilter implements GlobalFilter {
 
 			String pathCollection[] = pathConfig.split("|");
 			
-			log.info("@@@ pathCollection {}", pathCollection.toString());
+		   System.err.println(pathCollection.toString());
 
 
 			paths = pathCollection[0].split(",");
@@ -223,7 +223,9 @@ public class CountryLocationFilter implements GlobalFilter {
 			
 			
 			log.info("@@@ paths {}", paths.toString());
-			log.info("@@@ statuses {}", statuses.toString());
+			
+			System.err.println("@@@ paths " + paths);
+			System.err.println("@@@ status " + statuses);
 
 
 
