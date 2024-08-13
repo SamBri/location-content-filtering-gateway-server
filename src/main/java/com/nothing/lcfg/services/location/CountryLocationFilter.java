@@ -1,6 +1,8 @@
 package com.nothing.lcfg.services.location;
 
 import java.net.InetSocketAddress;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -204,10 +206,28 @@ public class CountryLocationFilter implements GlobalFilter {
 			String pathConfig;
 
 			pathConfig = pathConfiguration.getString(countryCode);
+			String paths[] = null;
+			String statuses[] = null;
 			
-			String paths[];
-			String statuses[];
+			String pathCollection[]  = pathConfig.split("|");
 			
+			 paths =	pathCollection[0].split(",");
+				statuses = pathCollection[1].split(",");
+				
+
+			HashMap<String, String> routingMap = new HashMap<String,String>();
+			
+			for(int i = 0; i < pathCollection.length; i++) {
+				
+				if(pathCollection[i].equalsIgnoreCase(",")) {
+					
+					routingMap.put(paths[i], statuses[i]);
+					
+				}
+				
+			}
+
+		   
 			
 			
 
