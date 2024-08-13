@@ -47,7 +47,9 @@ public class CountryLocationFilter implements GlobalFilter {
 
 		String theUserRequestedService = exchange.getRequest().getPath().toString();
 		InetSocketAddress remoteAddress = exchange.getRequest().getRemoteAddress();
-
+		
+		log.info("@@ The request path ::  {}", theUserRequestedService);
+		
 		String remoteAddressIp = remoteAddress.getAddress().toString();
 		String localAddressIp = exchange.getRequest().getLocalAddress().getAddress().toString();
 
