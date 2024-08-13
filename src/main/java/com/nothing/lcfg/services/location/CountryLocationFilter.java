@@ -32,7 +32,7 @@ public class CountryLocationFilter implements GlobalFilter {
 
 	@Autowired
 	ResourceBundle routingMessagesBundle;
-	
+
 	@Autowired
 	ResourceBundle pathConfiguration;
 
@@ -52,9 +52,9 @@ public class CountryLocationFilter implements GlobalFilter {
 
 		String theUserRequestedService = exchange.getRequest().getPath().toString();
 		InetSocketAddress remoteAddress = exchange.getRequest().getRemoteAddress();
-		
+
 		log.info("@@ The request path ::  {}", theUserRequestedService);
-		
+
 		String remoteAddressIp = remoteAddress.getAddress().toString();
 		String localAddressIp = exchange.getRequest().getLocalAddress().getAddress().toString();
 
@@ -189,47 +189,113 @@ public class CountryLocationFilter implements GlobalFilter {
 		case "DE":
 		case "GH":
 
-			switch (theUserRequestedService) {
-			case "/luxury-cars/world": {
-				String routingMessage = "";
+//			switch (theUserRequestedService) {
+//			case "/luxury-cars/world": {
+//				String routingMessage = "";
+//
+//				routingMessage = routingMessage.replace("{serviceName}", theUserRequestedService);
+//				routingMessage = routingMessage.replace("{country}", sourceIpCountry);
+//
+//				log.error("routingMessage:", routingMessage);
+//				throw new ServiceUnavailableException(routingMessage);
+//
+//			}
+//			default:
+//			}
 
-				routingMessage = routingMessage.replace("{serviceName}", theUserRequestedService);
-				routingMessage = routingMessage.replace("{country}", sourceIpCountry);
-
-				log.error("routingMessage:", routingMessage);
-				throw new ServiceUnavailableException(routingMessage);
-
-			}
-			default:
-			}
-			
 			String pathConfig;
 
 			pathConfig = pathConfiguration.getString(countryCode);
+			
+			
+			log.info("@@@ pathConfig {}", pathConfig);
+			
 			String paths[] = null;
 			String statuses[] = null;
-			
-			String pathCollection[]  = pathConfig.split("|");
-			
-			 paths =	pathCollection[0].split(",");
-				statuses = pathCollection[1].split(",");
-				
 
-			HashMap<String, String> routingMap = new HashMap<String,String>();
+			String pathCollection[] = pathConfig.split("|");
 			
-			for(int i = 0; i < pathCollection.length; i++) {
-				
-				if(pathCollection[i].equalsIgnoreCase(",")) {
+			log.info("@@@ pathCollection {}", pathCollection.toString());
+
+
+			paths = pathCollection[0].split(",");
+			statuses = pathCollection[1].split(",");
+			
+			
+			log.info("@@@ paths {}", paths.toString());
+			log.info("@@@ statuses {}", statuses.toString());
+
+
+
+			HashMap<String, String> routingMap = new HashMap<String, String>();
+
+			for (int i = 0; i < pathCollection.length; i++) {
+
+				if (pathCollection[i].equalsIgnoreCase(",")) {
 					
+					log.info("paths {} :: status {}",paths[i], statuses[i] );
+
 					routingMap.put(paths[i], statuses[i]);
-					
+
+				}
+
+			}
+			
+			
+
+				
+			
+			
+			routingMap.forEach( (path, status) -> {
+				
+				status = status.toUpperCase();
+				
+				String routingMessage = "";
+
+				routingMessage = routingMessagesBundle.getString(status);
+				routingMessage = routingMessage.replace("{serviceName}", path);
+				routingMessage = routingMessage.replace("{country}", sourceIpCountry);
+				routingMessage = routingMessage.replace("{serviceStatus}", status);
+
+		
+				
+				switch (status) {
+				case "BLOCKED" -> {
+	
+					// all services are blocked by default
+	
+					log.info("@@@  BLOCKED service status.");
+					throw new ServiceBlockedException(routingMessage, status);
+	
+				}
+				case "ALLOWED" -> {
+	
+					log.info("@@@  ALLOWED service status.");
+	
+				}
+				case "AVAILABLE" -> {
+	
+					log.info("@@@  AVAILABLE service status.");
+	
+				}
+				case "UNAVAILABLE" -> {
+	
+					log.info("@@@  UNAVAILABLE service status.");
+	
+					log.error("routingMessage:", routingMessage);
+					throw new ServiceUnavailableException(routingMessage, status);
+	
+				}
+				default -> {
+					throw new IllegalArgumentException("Unexpected value: " + status);
+	
 				}
 				
-			}
-
-		   
-			
-			
+				}
+				
+				
+				
+			});
 
 //			log.info("countryServiceStatus found {}", countryServiceStatus);
 //
