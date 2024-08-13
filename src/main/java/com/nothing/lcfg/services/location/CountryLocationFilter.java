@@ -185,7 +185,7 @@ public class CountryLocationFilter implements GlobalFilter {
 		case "GH":
 
 			switch (theUserRequestedService) {
-			case "/luxury-cars/model": {
+			case "/luxury-cars/world": {
 				String routingMessage = "";
 
 				routingMessage = routingMessage.replace("{serviceName}", theUserRequestedService);
