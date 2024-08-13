@@ -215,8 +215,11 @@ public class CountryLocationFilter implements GlobalFilter {
 
 			String pathCollection[] = pathConfig.split("|");
 			
-		   System.err.println(pathCollection.toString());
 
+			
+			for(String pathColl : pathCollection) {
+				System.err.println(pathColl);
+			}
 
 			paths = pathCollection[0].split(",");
 			statuses = pathCollection[1].split(",");
@@ -224,8 +227,18 @@ public class CountryLocationFilter implements GlobalFilter {
 			
 			log.info("@@@ paths {}", paths.toString());
 			
-			System.err.println("@@@ paths " + paths);
-			System.err.println("@@@ status " + statuses);
+			
+			for(String path : paths) {
+				System.err.println("@@ path :: "+path);
+			}
+			
+			
+			for(String status : statuses) {
+				System.err.println("@@ status :: "+status);
+			}
+			
+			
+			//System.err.println("@@@ status " + statuses);
 
 
 
