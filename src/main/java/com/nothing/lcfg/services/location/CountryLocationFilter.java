@@ -213,7 +213,7 @@ public class CountryLocationFilter implements GlobalFilter {
 			String paths[] = null;
 			String statuses[] = null;
 
-			String pathCollection[] = pathConfig.split("|");
+			String pathCollection[] = pathConfig.split("\\|");
 			
 
 			
