@@ -65,7 +65,7 @@ public class CountryLocationFilter implements GlobalFilter {
 		log.info("countryCode recvd {}", countryCode);
 		if (countryCode != null && !countryCode.isEmpty()) {
 
-			switch  (gatewayBoundaryType.toUpperCase()) {
+			switch (gatewayBoundaryType.toUpperCase()) {
 
 			case "COUNTRY":
 				log.info("@@@ gateway boundary type is {}", gatewayBoundaryType);
@@ -76,7 +76,7 @@ public class CountryLocationFilter implements GlobalFilter {
 				log.info("@@@ gateway boundary type is {}", gatewayBoundaryType);
 				filterServiceAccessByServiceType(theUserRequestedService, sourceIpCountry, countryCode);
 				break;
-				
+
 			default:
 				log.error("no boudary type specified.");
 
@@ -93,7 +93,7 @@ public class CountryLocationFilter implements GlobalFilter {
 
 	private void filterServiceAccessByServiceType(String theUserRequestedService, String sourceIpCountry,
 			String countryCode) {
-		
+
 		log.info("@@@ inside  filterServiceAccessByServiceType");
 
 		switch (countryCode) {
@@ -365,10 +365,9 @@ public class CountryLocationFilter implements GlobalFilter {
 
 	private void filterServiceAccessByCountryCode(String theUserRequestedService, String sourceIpCountry,
 			String countryCode) {
-		
+
 		log.info("@@@ inside  filterServiceAccessByCountryCode");
 
-		
 		String countryServiceStatus = isoCountryCodeBundle.getString(countryCode);
 
 		String routingMessage = null;
