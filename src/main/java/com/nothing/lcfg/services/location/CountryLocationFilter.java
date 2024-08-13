@@ -30,6 +30,9 @@ public class CountryLocationFilter implements GlobalFilter {
 
 	@Autowired
 	ResourceBundle routingMessagesBundle;
+	
+	@Autowired
+	ResourceBundle pathConfiguration;
 
 	@Value("${gateway.boundary.type}")
 	String gatewayBoundaryType;
@@ -197,6 +200,53 @@ public class CountryLocationFilter implements GlobalFilter {
 			}
 			default:
 			}
+			
+			String pathConfig;
+
+			pathConfig = pathConfiguration.getString(countryCode);
+			
+			String paths[];
+			String statuses[];
+			
+			
+			
+
+//			log.info("countryServiceStatus found {}", countryServiceStatus);
+//
+//			// java17 switch expression usage
+//			countryServiceStatus = countryServiceStatus.toUpperCase();
+//
+//			switch (countryServiceStatus) {
+//			case "BLOCKED" -> {
+//
+//				// all services are blocked by default
+//
+//				log.info("@@@  BLOCKED service status.");
+//				throw new ServiceBlockedException(routingMessage, countryServiceStatus);
+//
+//			}
+//			case "ALLOWED" -> {
+//
+//				log.info("@@@  ALLOWED service status.");
+//
+//			}
+//			case "AVAILABLE" -> {
+//
+//				log.info("@@@  AVAILABLE service status.");
+//
+//			}
+//			case "UNAVAILABLE" -> {
+//
+//				log.info("@@@  UNAVAILABLE service status.");
+//
+//				log.error("routingMessage:", routingMessage);
+//				throw new ServiceUnavailableException(routingMessage, countryServiceStatus);
+//
+//			}
+//			default -> {
+//				throw new IllegalArgumentException("Unexpected value: " + countryServiceStatus);
+//
+//			}
 
 			break;
 		case "GI":

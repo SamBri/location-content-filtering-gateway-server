@@ -73,6 +73,11 @@ public class LocationContentRoutingConfig {
 		return   ResourceBundle.getBundle("routing-messages");
 	}
 
+
+	@Bean
+	ResourceBundle pathConfiguration() {
+		return   ResourceBundle.getBundle("path-boundary-configuration");
+	}
 	
 	@Bean  	
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
