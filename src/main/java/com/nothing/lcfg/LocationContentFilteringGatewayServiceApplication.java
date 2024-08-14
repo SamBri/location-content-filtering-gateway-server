@@ -3,6 +3,7 @@ package com.nothing.lcfg;
 import java.util.ResourceBundle;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -15,8 +16,24 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class LocationContentFilteringGatewayServiceApplication {
 
+	// Route
+	@Value("${cars.luxury.route.config.path}")
+	private String luxuryCarsRoute;
+
+	@Value("${cars.mainstream.route.config.path}")
+	private String microCarsRoute;
+
+	@Value("${cars.sports.route.config.path}")
+	private String sportsCarsRoute;
+
+	@Value("${cars.mainstream.route.config.path}")
+	private String mainstreamCarsRoute;
+
+	@Value("${gateway.base-context-id}")
+	private String gatewayBaseContextId;
+
 	public static void main(String[] args) {
-	
+
 //		System.out.println("Main");
 //	    Logger logger = LoggerFactory.getLogger("chapters.introduction.HelloWorld1");
 //	    logger.info("Hello world.".concat(System.getProperty("os.name")));	
@@ -24,25 +41,19 @@ public class LocationContentFilteringGatewayServiceApplication {
 //		
 		SpringApplication.run(LocationContentFilteringGatewayServiceApplication.class, args);
 	}
-	
-	
-	@Autowired
-	ResourceBundle  routeResourceBundle;
-	
 
 	@RequestMapping("/")
 	public String index(Model theModel) {
-		final String toLuxuryCarsWorld =routeResourceBundle.getString("cars.luxury.page.world");
-		final String toMainStreamCarsWorld  =routeResourceBundle.getString("cars.mainstream.page.world");
-		final String toMicroCarsWorld  =routeResourceBundle.getString("cars.micro.page.world");
-		final String toSportsCarsWorld  =routeResourceBundle.getString("cars.sports.page.world");
+		final String toLuxuryCarsWorld = luxuryCarsRoute;
+		final String toMainStreamCarsWorld = mainstreamCarsRoute;
+		final String toMicroCarsWorld = microCarsRoute;
+		final String toSportsCarsWorld = sportsCarsRoute;
 
-		theModel.addAttribute("toLuxuryCarsWorld",  toLuxuryCarsWorld);
-		theModel.addAttribute("toMainStreamCarsWorld",  toMainStreamCarsWorld);
-		theModel.addAttribute("toMicroCarsWorld",  toMicroCarsWorld);
-		theModel.addAttribute("toSportsCarsWorld",  toSportsCarsWorld);
+		theModel.addAttribute("toLuxuryCarsWorld", toLuxuryCarsWorld);
+		theModel.addAttribute("toMainStreamCarsWorld", toMainStreamCarsWorld);
+		theModel.addAttribute("toMicroCarsWorld", toMicroCarsWorld);
+		theModel.addAttribute("toSportsCarsWorld", toSportsCarsWorld);
 
-		
 		System.err.println("inside gateway landing page.");
 		System.err.println("toLuxuryCarsWorld :: " + toLuxuryCarsWorld);
 		System.err.println("toMainStreamCarsWorld :: " + toMainStreamCarsWorld);
@@ -63,8 +74,5 @@ public class LocationContentFilteringGatewayServiceApplication {
 	RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
-	
-	
-	
-	
+
 }
