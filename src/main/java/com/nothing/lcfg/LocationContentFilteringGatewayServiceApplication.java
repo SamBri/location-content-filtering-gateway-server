@@ -27,15 +27,15 @@ public class LocationContentFilteringGatewayServiceApplication {
 	
 	
 	@Autowired
-	ResourceBundle  welcomePageResourceBundle;
+	ResourceBundle  routeResourceBundle;
 	
 
 	@RequestMapping("/")
 	public String index(Model theModel) {
-		final String toLuxuryCarsWorld =welcomePageResourceBundle.getString("luxury.cars.path");
-		final String toMainStreamCarsWorld  =welcomePageResourceBundle.getString("mainstream.cars.path");
-		final String toMicroCarsWorld  =welcomePageResourceBundle.getString("micro.cars.path");
-		final String toSportsCarsWorld  =welcomePageResourceBundle.getString("sports.cars.path");
+		final String toLuxuryCarsWorld =routeResourceBundle.getString("cars.luxury.page.world");
+		final String toMainStreamCarsWorld  =routeResourceBundle.getString("cars.mainstream.page.world");
+		final String toMicroCarsWorld  =routeResourceBundle.getString("cars.micro.page.world");
+		final String toSportsCarsWorld  =routeResourceBundle.getString("cars.sports.page.world");
 
 		theModel.addAttribute("toLuxuryCarsWorld",  toLuxuryCarsWorld);
 		theModel.addAttribute("toMainStreamCarsWorld",  toMainStreamCarsWorld);
