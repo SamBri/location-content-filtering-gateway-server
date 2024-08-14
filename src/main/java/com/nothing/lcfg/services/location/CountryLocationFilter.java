@@ -247,7 +247,7 @@ public class CountryLocationFilter implements GlobalFilter {
 
 			for (int i = 0; i < pathCollection.length; i++) {
 
-				if (pathCollection[i].equalsIgnoreCase(",")) {
+				if (!pathCollection[i].equalsIgnoreCase(",")) {
 					
 					log.info("paths {} :: status {}",paths[i], statuses[i] );
 
