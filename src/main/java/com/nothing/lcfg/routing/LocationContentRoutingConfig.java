@@ -87,8 +87,8 @@ public class LocationContentRoutingConfig {
 						.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight to the
 																										// url
 				).uri(luxuryCarsInterface))
-				.route(r -> r.host(hostApplication).and().path(mainstreamCarsRoute.concat("/**"))
-						.filters(f -> f.rewritePath("/" + gatewayBaseContextId + "/?(?<segment>.*)", "/${segment}")
+				.route(r -> r.host(hostApplication).and().path("/"+gatewayBaseContextId.concat("/**"))
+						.filters(f -> f.rewritePath("/" + mainstreamCarsRoute + "/?(?<segment>.*)", "/${segment}")
 								.addRequestHeadersIfNotPresent(
 										"X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
 								.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight
@@ -96,8 +96,8 @@ public class LocationContentRoutingConfig {
 																												// the
 																												// url
 						).uri(mainstreamCarsInterface))
-				.route(r -> r.host(hostApplication).and().path(sportsCarsRoute.concat("/**"))
-						.filters(f -> f.rewritePath("/" + gatewayBaseContextId + "/?(?<segment>.*)", "/${segment}")
+				.route(r -> r.host(hostApplication).and().path("/"+gatewayBaseContextId.concat("/**"))
+						.filters(f -> f.rewritePath("/" + sportsCarsRoute + "/?(?<segment>.*)", "/${segment}")
 								.addRequestHeadersIfNotPresent(
 										"X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
 								.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight
@@ -105,8 +105,8 @@ public class LocationContentRoutingConfig {
 																												// the
 																												// url
 						).uri(sportsCarsInterface))
-				.route(r -> r.host(hostApplication).and().path(microCarsRoute.concat("/**"))
-						.filters(f -> f.rewritePath("/" + gatewayBaseContextId + "/?(?<segment>.*)", "/${segment}")
+				.route(r -> r.host(hostApplication).and().path("/"+gatewayBaseContextId.concat("/**"))
+						.filters(f -> f.rewritePath("/" + microCarsRoute + "/?(?<segment>.*)", "/${segment}")
 								.addRequestHeadersIfNotPresent(
 										"X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
 								.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight
