@@ -30,7 +30,6 @@ public class LocationContentRoutingConfig {
 	@Value("${ms.micro.cars}")
 	private String microCarsInterface;
 
-
 	// Route
 	@Value("${cars.luxury.route.config.path}")
 	private String luxuryCarsRoute;
@@ -47,7 +46,6 @@ public class LocationContentRoutingConfig {
 	@Value("${gateway.base-context-id}")
 	private String gatewayBaseContextId;
 
-	
 
 //	@Bean
 //	StandardMessageResolver myMessageResolver() {
@@ -82,14 +80,14 @@ public class LocationContentRoutingConfig {
 
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-		return builder.routes().route(r -> r.host(hostApplication).and().path("/"+luxuryCarsRoute.concat("/**"))
-				.filters(f -> f.rewritePath("/" + luxuryCarsRoute + "/?(?<segment>.*)", "/${segment}")
+		return builder.routes().route(r -> r.host(hostApplication).and().path("/" + luxuryCarsRoute.concat("/**"))
+				.filters(f -> f.rewritePath("/" + gatewayBaseContextId + "/?(?<segment>.*)", "/${segment}")
 						.addRequestHeadersIfNotPresent("X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
 						.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight to the
 																										// url
 				).uri(luxuryCarsInterface))
-				.route(r -> r.host(hostApplication).and().path("/"+mainstreamCarsRoute.concat("/**"))
-						.filters(f -> f.rewritePath("/" + mainstreamCarsRoute + "/?(?<segment>.*)", "/${segment}")
+				.route(r -> r.host(hostApplication).and().path("/" + mainstreamCarsRoute.concat("/**"))
+						.filters(f -> f.rewritePath("/" + gatewayBaseContextId + "/?(?<segment>.*)", "/${segment}")
 								.addRequestHeadersIfNotPresent(
 										"X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
 								.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight
@@ -97,8 +95,8 @@ public class LocationContentRoutingConfig {
 																												// the
 																												// url
 						).uri(mainstreamCarsInterface))
-				.route(r -> r.host(hostApplication).and().path("/"+sportsCarsRoute.concat("/**"))
-						.filters(f -> f.rewritePath("/" + sportsCarsRoute + "/?(?<segment>.*)", "/${segment}")
+				.route(r -> r.host(hostApplication).and().path("/" + sportsCarsRoute.concat("/**"))
+						.filters(f -> f.rewritePath("/" + gatewayBaseContextId + "/?(?<segment>.*)", "/${segment}")
 								.addRequestHeadersIfNotPresent(
 										"X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
 								.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight
@@ -106,8 +104,8 @@ public class LocationContentRoutingConfig {
 																												// the
 																												// url
 						).uri(sportsCarsInterface))
-				.route(r -> r.host(hostApplication).and().path("/"+microCarsRoute.concat("/**"))
-						.filters(f -> f.rewritePath("/" + microCarsRoute + "/?(?<segment>.*)", "/${segment}")
+				.route(r -> r.host(hostApplication).and().path("/" + microCarsRoute.concat("/**"))
+						.filters(f -> f.rewritePath("/" + gatewayBaseContextId + "/?(?<segment>.*)", "/${segment}")
 								.addRequestHeadersIfNotPresent(
 										"X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
 								.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight
