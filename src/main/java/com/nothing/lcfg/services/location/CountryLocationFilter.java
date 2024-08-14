@@ -206,68 +206,51 @@ public class CountryLocationFilter implements GlobalFilter {
 			String pathConfig;
 
 			pathConfig = pathConfiguration.getString(countryCode);
-			
-			
+
 			log.info("@@@ pathConfig {}", pathConfig);
-			
+
 			String paths[] = null;
 			String statuses[] = null;
 
 			String pathCollection[] = pathConfig.split("\\|");
-			
-			log.info("pathCollectionLength ::" + pathCollection.length);
-			
 
-			
-			for(String pathColl : pathCollection) {
-				System.err.println("@@ pathCol ::" +pathColl);
+			log.info("pathCollectionLength ::" + pathCollection.length);
+
+			for (String pathColl : pathCollection) {
+				System.err.println("@@ pathCol ::" + pathColl);
 			}
 
 			paths = pathCollection[0].split(",");
 			statuses = pathCollection[1].split(",");
-			
-			
 
-			
-			
-			
-			for(String path : paths) {
-				System.err.println("@@ path :: "+path);
+			for (String path : paths) {
+				System.err.println("@@ path :: " + path);
 			}
-			
-			
-			for(String status : statuses) {
-				System.err.println("@@ status :: "+status);
+
+			for (String status : statuses) {
+				System.err.println("@@ status :: " + status);
 			}
-			
-			
-			//System.err.println("@@@ status " + statuses);
 
-
+			// System.err.println("@@@ status " + statuses);
 
 			HashMap<String, String> routingMap = new HashMap<String, String>();
 
 			for (int i = 0; ((i < paths.length) && (i < statuses.length)); i++) {
 
 				if (!pathCollection[i].equalsIgnoreCase(",")) {
-					
-					log.info("paths {} :: status {}",paths[i], statuses[i] );
+
+					log.info("paths {} :: status {}", paths[i], statuses[i]);
 
 					routingMap.put(paths[i], statuses[i]);
 
 				}
 
 			}
-			
-			
 
-				
-			
-			
-			routingMap.forEach( (path, status) -> {
-				
+			routingMap.forEach((path, status) -> {
+
 				status = status.toUpperCase();
-				
+
 				String routingMessage = "";
 
 				routingMessage = routingMessagesBundle.getString(status);
@@ -275,44 +258,44 @@ public class CountryLocationFilter implements GlobalFilter {
 				routingMessage = routingMessage.replace("{country}", sourceIpCountry);
 				routingMessage = routingMessage.replace("{serviceStatus}", status);
 
-		
-				
-				switch (status) {
-				case "BLOCKED" -> {
-	
-					// all services are blocked by default
-	
-					log.info("@@@  BLOCKED service status.");
-					throw new ServiceBlockedException(routingMessage, status);
-	
+				if (path.equalsIgnoreCase(theUserRequestedService)) {
+					switch (status) {
+					case "BLOCKED" -> {
+
+						// all services are blocked by default
+
+						log.info("@@@  BLOCKED service status.");
+						throw new ServiceBlockedException(routingMessage, status);
+
+					}
+					case "ALLOWED" -> {
+
+						log.info("@@@  ALLOWED service status.");
+
+					}
+					case "AVAILABLE" -> {
+
+						log.info("@@@  AVAILABLE service status.");
+
+					}
+					case "UNAVAILABLE" -> {
+
+						log.info("@@@  UNAVAILABLE service status.");
+
+						log.error("routingMessage:", routingMessage);
+						throw new ServiceUnavailableException(routingMessage, status);
+
+					}
+					default -> {
+						throw new IllegalArgumentException("Unexpected value: " + status);
+
+					}
+
+					}
+				} else {
+					log.error("all is well");
 				}
-				case "ALLOWED" -> {
-	
-					log.info("@@@  ALLOWED service status.");
-	
-				}
-				case "AVAILABLE" -> {
-	
-					log.info("@@@  AVAILABLE service status.");
-	
-				}
-				case "UNAVAILABLE" -> {
-	
-					log.info("@@@  UNAVAILABLE service status.");
-	
-					log.error("routingMessage:", routingMessage);
-					throw new ServiceUnavailableException(routingMessage, status);
-	
-				}
-				default -> {
-					throw new IllegalArgumentException("Unexpected value: " + status);
-	
-				}
-				
-				}
-				
-				
-				
+
 			});
 
 //			log.info("countryServiceStatus found {}", countryServiceStatus);
