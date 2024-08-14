@@ -25,7 +25,7 @@ public class LocationContentFilteringGatewayServiceApplication {
 	@Value("${cars.mainstream.page.world}")
 	private String microCarsWorldPage;
 
-	@Value("${cars.sports.route.config.path}")
+	@Value("${cars.sports.page.world}")
 	private String sportsCarsWorldPage;
 
 	@Value("${cars.sports.page.world}")
