@@ -247,7 +247,7 @@ public class CountryLocationFilter implements GlobalFilter {
 
 			HashMap<String, String> routingMap = new HashMap<String, String>();
 
-			for (int i = 0; i < pathCollection.length; i++) {
+			for (int i = 0; ((i < paths.length) && (i < statuses.length)); i++) {
 
 				if (!pathCollection[i].equalsIgnoreCase(",")) {
 					
