@@ -16,21 +16,21 @@ import org.springframework.web.client.RestTemplate;
 @Controller
 public class LocationContentFilteringGatewayServiceApplication {
 
+		
+	
 	// Route
-	@Value("${cars.luxury.route.config.path}")
-	private String luxuryCarsRoute;
+	@Value("${cars.luxury.page.world}")
+	private String luxuryCarsWorldPage;
 
-	@Value("${cars.mainstream.route.config.path}")
-	private String microCarsRoute;
+	@Value("${cars.mainstream.page.world}")
+	private String microCarsWorldPage;
 
 	@Value("${cars.sports.route.config.path}")
-	private String sportsCarsRoute;
+	private String sportsCarsWorldPage;
 
-	@Value("${cars.mainstream.route.config.path}")
-	private String mainstreamCarsRoute;
+	@Value("${cars.sports.page.world}")
+	private String mainstreamCarsWorldPage;
 
-	@Value("${gateway.base-context-id}")
-	private String gatewayBaseContextId;
 
 	public static void main(String[] args) {
 
@@ -44,10 +44,10 @@ public class LocationContentFilteringGatewayServiceApplication {
 
 	@RequestMapping("/")
 	public String index(Model theModel) {
-		final String toLuxuryCarsWorld = luxuryCarsRoute;
-		final String toMainStreamCarsWorld = mainstreamCarsRoute;
-		final String toMicroCarsWorld = microCarsRoute;
-		final String toSportsCarsWorld = sportsCarsRoute;
+		final String toLuxuryCarsWorld = luxuryCarsWorldPage;
+		final String toMainStreamCarsWorld = mainstreamCarsWorldPage;
+		final String toMicroCarsWorld = microCarsWorldPage;
+		final String toSportsCarsWorld = sportsCarsWorldPage;
 
 		theModel.addAttribute("toLuxuryCarsWorld", toLuxuryCarsWorld);
 		theModel.addAttribute("toMainStreamCarsWorld", toMainStreamCarsWorld);
