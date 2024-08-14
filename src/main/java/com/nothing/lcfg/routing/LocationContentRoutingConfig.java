@@ -81,8 +81,8 @@ public class LocationContentRoutingConfig {
 
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-		return builder.routes().route(r -> r.host(hostApplication).and().path(luxuryCarsRoute.concat("/**"))
-				.filters(f -> f.rewritePath("/" + gatewayBaseContextId + "/?(?<segment>.*)", "/${segment}")
+		return builder.routes().route(r -> r.host(hostApplication).and().path("/"+gatewayBaseContextId.concat("/**"))
+				.filters(f -> f.rewritePath("/" + luxuryCarsRoute + "/?(?<segment>.*)", "/${segment}")
 						.addRequestHeadersIfNotPresent("X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
 						.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight to the
 																										// url
