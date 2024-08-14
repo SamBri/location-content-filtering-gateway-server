@@ -82,13 +82,13 @@ public class LocationContentRoutingConfig {
 
 	@Bean
 	public RouteLocator customRouteLocator(RouteLocatorBuilder builder) {
-		return builder.routes().route(r -> r.host(hostApplication).and().path(luxuryCarsRoute.concat("/**"))
+		return builder.routes().route(r -> r.host(hostApplication).and().path("/"+luxuryCarsRoute.concat("/**"))
 				.filters(f -> f.rewritePath("/" + luxuryCarsRoute + "/?(?<segment>.*)", "/${segment}")
 						.addRequestHeadersIfNotPresent("X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
 						.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight to the
 																										// url
 				).uri(luxuryCarsInterface))
-				.route(r -> r.host(hostApplication).and().path(mainstreamCarsRoute.concat("/**"))
+				.route(r -> r.host(hostApplication).and().path("/"+mainstreamCarsRoute.concat("/**"))
 						.filters(f -> f.rewritePath("/" + mainstreamCarsRoute + "/?(?<segment>.*)", "/${segment}")
 								.addRequestHeadersIfNotPresent(
 										"X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
@@ -97,7 +97,7 @@ public class LocationContentRoutingConfig {
 																												// the
 																												// url
 						).uri(mainstreamCarsInterface))
-				.route(r -> r.host(hostApplication).and().path(sportsCarsRoute.concat("/**"))
+				.route(r -> r.host(hostApplication).and().path("/"+sportsCarsRoute.concat("/**"))
 						.filters(f -> f.rewritePath("/" + sportsCarsRoute + "/?(?<segment>.*)", "/${segment}")
 								.addRequestHeadersIfNotPresent(
 										"X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
@@ -106,7 +106,7 @@ public class LocationContentRoutingConfig {
 																												// the
 																												// url
 						).uri(sportsCarsInterface))
-				.route(r -> r.host(hostApplication).and().path(microCarsRoute.concat("/**"))
+				.route(r -> r.host(hostApplication).and().path("/"+microCarsRoute.concat("/**"))
 						.filters(f -> f.rewritePath("/" + microCarsRoute + "/?(?<segment>.*)", "/${segment}")
 								.addRequestHeadersIfNotPresent(
 										"X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
