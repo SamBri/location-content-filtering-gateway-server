@@ -22,13 +22,13 @@ public class LocationContentFilteringGatewayServiceApplication {
 	@Value("${cars.luxury.page.world}")
 	private String luxuryCarsWorldPage;
 
-	@Value("${cars.mainstream.page.world}")
+	@Value("${cars.micro.page.world}")
 	private String microCarsWorldPage;
 
 	@Value("${cars.sports.page.world}")
 	private String sportsCarsWorldPage;
 
-	@Value("${cars.sports.page.world}")
+	@Value("${cars.mainstream.page.world}")
 	private String mainstreamCarsWorldPage;
 
 
