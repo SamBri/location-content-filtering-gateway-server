@@ -215,6 +215,8 @@ public class CountryLocationFilter implements GlobalFilter {
 
 			String pathCollection[] = pathConfig.split("\\|");
 			
+			log.info("pathCollectionLength ::" + pathCollection.length);
+			
 
 			
 			for(String pathColl : pathCollection) {
