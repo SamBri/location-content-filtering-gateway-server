@@ -34,7 +34,7 @@ public class LocationContentRoutingConfig {
 	@Value("${cars.luxury.route.config.path}")
 	private String luxuryCarsRoute;
 
-	@Value("${cars.mainstream.route.config.path}")
+	@Value("${cars.micro.route.config.path}")
 	private String microCarsRoute;
 
 	@Value("${cars.sports.route.config.path}")
