@@ -29,7 +29,9 @@ public class IPWhoIsClient {
 
 		ipWhoIsUrl = ipWhoIsUrl.replace("<IP_ADDRESS>", ipAddress);
 
-		RequestEntity<Void> request = RequestEntity.get(URI.create(ipWhoIsUrl)).accept(MediaType.APPLICATION_JSON)
+		RequestEntity<Void> request = RequestEntity
+				.get(URI.create(ipWhoIsUrl))
+				.accept(MediaType.APPLICATION_JSON)
 				.build();
 
 		ResponseEntity<IpWhoIsResponse> response = restTemplate.exchange(request, IpWhoIsResponse.class);
