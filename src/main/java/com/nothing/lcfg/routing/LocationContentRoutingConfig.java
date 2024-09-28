@@ -83,35 +83,21 @@ public class LocationContentRoutingConfig {
 		return builder.routes().route(r -> r.host(hostApplication).and().path("/" + luxuryCarsRoute.concat("/**"))
 				.filters(f -> f.rewritePath("/" + gatewayBaseContextId + "/?(?<segment>.*)", "/${segment}")
 						.addRequestHeadersIfNotPresent("X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
-						.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight to the
-																										// url
 				).uri(luxuryCarsInterface))
 				.route(r -> r.host(hostApplication).and().path("/" + mainstreamCarsRoute.concat("/**"))
 						.filters(f -> f.rewritePath("/" + gatewayBaseContextId + "/?(?<segment>.*)", "/${segment}")
 								.addRequestHeadersIfNotPresent(
 										"X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
-								.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight
-																												// to
-																												// the
-																												// url
 						).uri(mainstreamCarsInterface))
 				.route(r -> r.host(hostApplication).and().path("/" + sportsCarsRoute.concat("/**"))
 						.filters(f -> f.rewritePath("/" + gatewayBaseContextId + "/?(?<segment>.*)", "/${segment}")
 								.addRequestHeadersIfNotPresent(
 										"X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
-								.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight
-																												// to
-																												// the
-																												// url
 						).uri(sportsCarsInterface))
 				.route(r -> r.host(hostApplication).and().path("/" + microCarsRoute.concat("/**"))
 						.filters(f -> f.rewritePath("/" + gatewayBaseContextId + "/?(?<segment>.*)", "/${segment}")
 								.addRequestHeadersIfNotPresent(
 										"X-REQUEST-ID:{}".replace("{}", UUID.randomUUID().toString()))
-								.addRequestHeadersIfNotPresent("X-Pinggy-No-Screen:{}".replace("{}", "foo")) // straight
-																												// to
-																												// the
-																												// url
 						).uri(microCarsInterface)).build();
 
 		// /red/?(?<segment>.*), /$\{segment}
