@@ -511,14 +511,17 @@ public class CountryLocationFilter implements GlobalFilter {
 
 		String routingMessage = null;
 
-		routingMessage = routingMessagesBundle.getString(countryServiceStatus.toUpperCase());
+		String status = countryServiceStatus.toUpperCase();
+		routingMessage = routingMessagesBundle.getString(status);
 		routingMessage = routingMessage.replace("{serviceName}", theUserRequestedService);
 		routingMessage = routingMessage.replace("{country}", sourceIpCountry);
+		routingMessage = routingMessage.replace("{serviceStatus}", status);
+
 
 		log.info("countryServiceStatus found {}", countryServiceStatus);
 
 		// java17 switch expression usage
-		countryServiceStatus = countryServiceStatus.toUpperCase();
+		countryServiceStatus = status;
 
 		switch (countryServiceStatus) {
 		case "BLOCKED" -> {
